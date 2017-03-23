@@ -1,0 +1,13 @@
+<#body>
+    mysql示例:<br/>
+    序号 | 用户名 | 用户状态 | id(元) | 注册时间<br/>
+    <% for(data in datas){
+    if(dataLP.index<10){%>
+    ${dataLP.index}&nbsp;&nbsp;&nbsp;&nbsp;| ${data.name} | ${data.~userState} |&nbsp; ${centToYuan(data.id)} &nbsp;|&nbsp; ${data.registerTime,dateFormat="yyyy-MM-dd HH:mm:ss"}<br/>
+    <%}else{%>
+    ${dataLP.index}&nbsp;&nbsp;&nbsp;| ${data.name} | ${data.~userState} |&nbsp; ${centToYuan(data.id)} &nbsp;|&nbsp; ${data.registerTime,dateFormat="yyyy-MM-dd HH:mm:ss"}<br/>
+    <%}}%>
+
+</#body>
+
+

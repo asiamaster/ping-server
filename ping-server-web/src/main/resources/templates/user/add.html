@@ -1,0 +1,115 @@
+<#body>
+    <% var url_add = g_local + '/user/add';%>
+    <div id="navBar" class="page-header">
+        当前位置 :添加用户
+    </div>
+    <form id="userAdd" class="form-horizontal" role="form" method="post" action=${url_add}>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"
+                   for="form-field-1"> 用户名: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                <input type="text" required="true" id="form-field-1"
+                       placeholder="用户名" autocomplete="off" name="name"
+                       value=""  class="width-100">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"
+                   for="form-field-1"> 密码: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                <input type="password" required="true" id="form-field-2"
+                       placeholder="密码" autocomplete="off" name="password"
+                       value="" class="width-100">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"
+                   for="form-field-1"> 所属自贸区: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                <select name="bizId" id="clientSource" style="width:100%;">
+                    <%for(clientSource in clientSourceList!){%>
+                    <option value="${clientSource.value!}">${clientSource.name!}</option>
+                    <%}%>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"
+                   for="form-field-12"> 联系电话: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                <input isMobile="true" type="text"
+                       id="form-field-12" placeholder="手机号码" autocomplete="off"
+                       name="phone" value="" class="width-100">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"> 生效日期: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                <input class="form-control  form-time width-100" id="validTimeSt" readonly onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate:'%y-%M-%d 00:00:00'})"  name="validTimeSt" value=""  type="text" placeholder="生效日期"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"> 失效日期: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                <input class="form-control  form-time width-100" id="validTimeEnd" readonly onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate:'%y-%M-%d 23:59:59'})"  name="validTimeEnd" value=""  type="text" placeholder="失效日期"/>
+            </div>
+        </div>
+
+        <div id="d1" class="form-group">
+
+            <label class="col-sm-3 control-label no-padding-right"> 开放接口: </label>
+
+            <div id="d3" class="col-xs-12 col-sm-4">
+                <table id="juese" cellpadding="0" cellspacing="8">
+                    <tr>
+                        <td>未有接口</td>
+                        <td>&nbsp;</td>
+                        <td>已有接口</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select id="s1" name="s1" style="width:150px; height:220px;" multiple="multiple">
+                                <%for(interface in interfaceList!){%>
+                                <option value="${interface.id}">${interface.name}</option>
+                                <%}%>
+                            </select>
+                        </td>
+                        <td>
+                            <p><input id="b1" type="button" class="s1" value="--&gt;" /></p>
+                            <p><input id="b2" type="button"  class="s1" value="--&gt;&gt;" /></p>
+                            <p><input id="b3" type="button"  class="s1" value="&lt;--" /></p>
+                            <p><input id="b4" type="button"  class="s1" value="&lt;&lt;--" /></p>
+                        </td>
+                        <td>
+                            <input id="interfaceIds" name="interfaceIds" value="1" type="hidden"/>
+                            <select id="s2" autocomplete="off" name="s2" style="width:150px;height:220px;" multiple="multiple">
+
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit">
+                    <i class="icon-ok bigger-110"></i> 提交
+                </button>
+                &nbsp; &nbsp; &nbsp; <a class="btn btn-info" href="javascript:history.back()">
+                <i class="icon-undo bigger-110"></i> 返回 </a>
+            </div>
+        </div>
+    </form>
+</#body>
+
+<script src="${g_local_static}/view/userAdd.js"></script>

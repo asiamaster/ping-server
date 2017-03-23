@@ -1,0 +1,25 @@
+<!--普通用户列表-->
+<table class="table table-striped table-bordered table-condensed grid table-hover">
+    <thead>
+    <tr>
+        <th>用户名</th>
+        <th>联系电话</th>
+        <th>注册时间</th>
+        <th style="width:10%">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%for(item in userList!){ %>
+    <tr>
+        <td class="textC">${item.name}</td>
+        <td class="textC">${item.phone}</td>
+        <td class="textC">${item.registerTime,dateFormat="yyyy-MM-dd HH:mm:ss"}</td>
+        <td class="textC">
+            <a href="${g_local!}/user/lock/${item.id}" onclick="return confirm('确定锁定 ？');">锁定</a>
+            <a href="${g_local!}/user/updateView/${item.id}">编辑</a>
+            <a href="${g_local!}/user/detail/${item.id}">查看</a>
+        </td>
+    </tr>
+    <%}%>
+    </tbody>
+</table>

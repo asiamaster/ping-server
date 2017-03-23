@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>地利后台管理系统</title>
+
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+
+</head>
+<body class="no-skin">
+${desc}<br/>
+<% for(data in datas){%>
+    序号:${dataLP.index},接口名:${data.interfaceName},用户名:${data.userName},访问时间:${data.visitTime,dateFormat="yyyy-MM-dd HH:mm:ss"}<br/>
+<%}%>
+
+
+
+
+</body>
+</html>
+

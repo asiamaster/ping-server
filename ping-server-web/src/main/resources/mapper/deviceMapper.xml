@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.DeviceMapper">
+  <resultMap id="BaseResultMap" type="com.dili.ping.server.domain.Device">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="cost" jdbcType="BIGINT" property="cost" />
+    <result column="host" jdbcType="VARCHAR" property="host" />
+    <result column="port" jdbcType="INTEGER" property="port" />
+    <result column="running" jdbcType="BIT" property="running" />
+    <result column="launch_time" jdbcType="TIMESTAMP" property="launchTime" />
+    <result column="recover_time" jdbcType="TIMESTAMP" property="recoverTime" />
+    <result column="disconnect_time" jdbcType="TIMESTAMP" property="disconnectTime" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="yn" jdbcType="INTEGER" property="yn" />
+  </resultMap>
+
+</mapper>

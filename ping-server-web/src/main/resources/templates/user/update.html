@@ -1,0 +1,130 @@
+<#body>
+    <% var url_update = g_local + '/user/update';%>
+    <div id="navBar" class="page-header">
+        当前位置 :编辑用户
+    </div>
+    <form id="userAdd" class="form-horizontal" role="form" method="post" action=${url_update}>
+        <input type="hidden" name="id" value="${userDetail.id!}"/>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"
+                   for="form-field-1"> 用户名: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                <input type="text" required="true" id="form-field-1"
+                       placeholder="用户名" autocomplete="off" name="name"
+                       value="${userDetail.name!}"  class="width-100">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"
+                   for="form-field-1"> 密码: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                <input type="password" required="true" id="form-field-2"
+                       placeholder="密码" autocomplete="off" name="password"
+                       value="${userDetail.password}" class="width-100">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"
+                   for="form-field-1"> 所属自贸区: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                <select name="bizId" id="clientSource" style="width:100%;">
+                    <%for(clientSource in clientSourceList!){
+                        if(userBiz.bizId! == clientSource.value){
+                    %>
+                        <option value="${clientSource.value!}" selected="selected">${clientSource.name!}</option>
+                    <%}else{%>
+                        <option value="${clientSource.value!}">${clientSource.name!}</option>
+                    <%}}%>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"
+                   for="form-field-12"> 联系电话: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                <input isMobile="true" type="text"
+                       id="form-field-12" placeholder="手机号码" autocomplete="off"
+                       name="phone" value="${userDetail.phone!}" class="width-100">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"> 生效日期: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                <input class="form-control  form-time width-100" id="validTimeSt" readonly onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate:'%y-%M-%d 00:00:00'})"  name="validTimeSt" value="${userDetail.validTimeSt!,dateFormat='yyyy-MM-dd HH:mm:ss'}"  type="text" placeholder="生效日期"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"> 失效日期: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                <input class="form-control  form-time width-100" id="validTimeEnd" readonly onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate:'%y-%M-%d 23:59:59'})"  name="validTimeEnd" value="${userDetail.validTimeEnd!,dateFormat='yyyy-MM-dd HH:mm:ss'}"  type="text" placeholder="失效日期"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"> 账户状态: </label>
+            <div class="col-xs-12 col-sm-4"> <%if(userDetail.userState == 1){%> 正常 <%}else{%>锁定 <%}%></div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"> 注册时间: </label>
+            <div class="col-xs-12 col-sm-4">${userDetail.registerTime,dateFormat="yyyy-MM-dd HH:mm:ss"}</div>
+        </div>
+
+        <div id="d1" class="form-group">
+
+            <label class="col-sm-3 control-label no-padding-right"> 开放接口: </label>
+
+            <div id="d3" class="col-xs-12 col-sm-4">
+                <table id="juese" cellpadding="0" cellspacing="8">
+                    <tr>
+                        <td>未有接口</td>
+                        <td>&nbsp;</td>
+                        <td>已有接口</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select id="s1" name="s1" style="width:150px; height:220px;" multiple="multiple">
+                                <%for(interface in userNotUsedInterfaces!){%>
+                                <option value="${interface.id}">${interface.name}</option>
+                                <%}%>
+                            </select>
+                        </td>
+                        <td>
+                            <p><input id="b1" type="button" class="s1" value="--&gt;" /></p>
+                            <p><input id="b2" type="button"  class="s1" value="--&gt;&gt;" /></p>
+                            <p><input id="b3" type="button"  class="s1" value="&lt;--" /></p>
+                            <p><input id="b4" type="button"  class="s1" value="&lt;&lt;--" /></p>
+                        </td>
+                        <td>
+                            <input id="interfaceIds" name="interfaceIds" value="1" type="hidden"/>
+                            <select id="s2" autocomplete="off" name="s2" style="width:150px;height:220px;" multiple="multiple">
+                                <%for(interface in userUsedInterfaces!){%>
+                                <option value="${interface.id}">${interface.name}</option>
+                                <%}%>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="submit">
+                    <i class="icon-ok bigger-110"></i> 提交
+                </button>
+                &nbsp; &nbsp; &nbsp; <a class="btn btn-info" href="javascript:history.back()">
+                <i class="icon-undo bigger-110"></i> 返回 </a>
+            </div>
+        </div>
+    </form>
+</#body>
+
+<script src="${g_local_static}/view/userAdd.js"></script>

@@ -1,0 +1,111 @@
+<#body>
+    <% var url_update = g_local + '/user/update';%>
+    <div id="navBar" class="page-header">
+        当前位置 :查看用户
+    </div>
+    <form id="userAdd" class="form-horizontal" role="form" method="post" action=${url_update}>
+        <input type="hidden" name="id" value="${userDetail.id!}"/>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"> 用户名: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                ${userDetail.name!}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"> 密码: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                ${userDetail.password}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"> 所属自贸区: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                    <%for(clientSource in clientSourceList!){
+                    if(userBiz.bizId! == clientSource.value){%>
+                         ${clientSource.name!}
+                    <%}}%>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"> 联系电话: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                ${userDetail.phone!}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"> 生效日期: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                ${userDetail.validTimeSt!,dateFormat='yyyy-MM-dd HH:mm:ss'}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"> 失效日期: </label>
+
+            <div class="col-xs-12 col-sm-4">
+                ${userDetail.validTimeEnd!,dateFormat='yyyy-MM-dd HH:mm:ss'}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"> 账户状态: </label>
+            <div class="col-xs-12 col-sm-4"> <%if(userDetail.userState == 1){%> 正常 <%}else{%>锁定 <%}%></div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right"> 注册时间: </label>
+            <div class="col-xs-12 col-sm-4">${userDetail.registerTime,dateFormat="yyyy-MM-dd HH:mm:ss"}</div>
+        </div>
+
+        <div id="d1" class="form-group">
+
+            <label class="col-sm-3 control-label no-padding-right"> 开放接口: </label>
+
+            <div id="d3" class="col-xs-12 col-sm-4">
+                <table id="juese" cellpadding="0" cellspacing="8">
+                    <tr>
+                        <td>未有接口</td>
+                        <td>&nbsp;</td>
+                        <td>已有接口</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select id="s1" name="s1" style="width:150px; height:220px;" multiple="multiple">
+                                <%for(interface in userNotUsedInterfaces!){%>
+                                <option value="${interface.id}">${interface.name}</option>
+                                <%}%>
+                            </select>
+                        </td>
+                        <td>
+                            <p><input id="b1" type="button" class="s1" value="--&gt;" /></p>
+                            <p><input id="b2" type="button"  class="s1" value="--&gt;&gt;" /></p>
+                            <p><input id="b3" type="button"  class="s1" value="&lt;--" /></p>
+                            <p><input id="b4" type="button"  class="s1" value="&lt;&lt;--" /></p>
+                        </td>
+                        <td>
+                            <input id="interfaceIds" name="interfaceIds" value="1" type="hidden"/>
+                            <select id="s2" autocomplete="off" name="s2" style="width:150px;height:220px;" multiple="multiple">
+                                <%for(interface in userUsedInterfaces!){%>
+                                <option value="${interface.id}">${interface.name}</option>
+                                <%}%>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <a class="btn btn-info" href="javascript:history.back()">
+                <i class="icon-undo bigger-110"></i> 返回 </a>
+            </div>
+        </div>
+    </form>
+</#body>

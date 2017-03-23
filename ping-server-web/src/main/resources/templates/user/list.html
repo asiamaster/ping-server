@@ -1,0 +1,57 @@
+<#body>
+    <%
+        var url_lockUser = g_local + '/user/lockUserList';
+        var url_normalUser = g_local + '/user/normalUserList';
+    %>
+    <div id="navBar" class="page-header">
+        当前位置 : 接口访问用户列表
+    </div>
+
+    <form class="well form-search" role="form" id="queryForm" <% if(tabType=="lockUserList"){ %> action = ${url_lockUser} <%}else{%> action = ${url_normalUser} <%}%> method="POST">
+        <table class="table-condensed table -width">
+            <tr>
+                <td>用户名:</td>
+                <td><input type="text" style="width:200px;" name="name" placeholder="用户名" value="${queryParam.name!}"></td>
+                <td>注册时间:</td>
+                <td>
+                    <input id="registerTimeStartDate" readonly onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate:'%y-%M-%d 00:00:00'})"  name="registerTimeStartDate" value="${queryParam.registerTimeStartDate!,dateFormat='yyyy-MM-dd HH:mm:ss'}"  type="text" placeholder="开始时间"/>
+                    -
+                    <input id="registerTimeEndDate" readonly onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate:'%y-%M-%d 23:59:59'})"  name="registerTimeEndDate"  value="${queryParam.registerTimeEndDate!,dateFormat='yyyy-MM-dd HH:mm:ss'}"  type="text" placeholder="结束时间"/>
+                </td>
+                <input type="hidden" name="tabType"  value="${tabType!}">
+                <td class="align-right" rowspan="2">
+                    <button type="button" id="queryBtn" class="btn btn-primary btn-sm">查询</button>
+                    <a href="${g_local}/user/addView" class="btn btn-primary btn-sm" >添加</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <ul id="tab" class="nav nav-tabs">
+        <li <% if(tabType=="normalUserList"){ %> class="active" <%}%> >
+            <a href=${url_normalUser}>普通用户</a>
+        </li>
+        <li <% if(tabType=="lockUserList"){ %> class="active" <%}%> >
+            <a href=${url_lockUser}>锁定用户</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div <% if(tabType=="normalUserList"){ %> class="tab-pane active" <%}else{ %> class="tab-pane" <%}%> >
+        <% if(tabType=="normalUserList"){
+        include("normalUserList.html"){}
+        } %>
+        </div>
+        <div <% if(tabType=="lockUserList"){ %> class="tab-pane active" <%}else{ %> class="tab-pane" <%}%> >
+        <% if(tabType=="lockUserList"){
+        include("lockUserList.html"){}
+        } %>
+        </div>
+    </div>
+
+</#body>
+
+<script type="text/javascript">
+    $("#queryBtn").click(function(){
+            $("#queryForm").submit();
+    });
+
+</script>
