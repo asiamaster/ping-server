@@ -1,4 +1,4 @@
-package com.dili.ping.server.api.enums;
+package com.dili.ping.server.domain;
 
 /**
  *	状态枚举
