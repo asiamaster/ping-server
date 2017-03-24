@@ -1,7 +1,7 @@
 # ping-server
 Ping服务
 
-##ping服务应用技术说明
+## ping服务应用技术说明
 
 ### 1. 项目启动类
 `com.dili.Application`
