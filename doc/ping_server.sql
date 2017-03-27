@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2017/3/27 ĞÇÆÚÒ» 10:41:39                       */
+/* Created on:     2017/3/27 ï¿½ï¿½ï¿½ï¿½Ò» 10:41:39                       */
 /*==============================================================*/
 
 
@@ -76,16 +76,16 @@ create table device
    name                 varchar(20),
    host                 varchar(15),
    port                 int,
-   running_state        boolean comment '1:ÔËĞĞ£¬0:Î´ÔËĞĞ',
+   running_state        boolean comment '1:ï¿½ï¿½ï¿½Ğ£ï¿½0:Î´ï¿½ï¿½ï¿½ï¿½',
    launch_time          datetime,
-   cost                 bigint comment 'µ¥Î»:ms',
+   cost                 bigint comment 'ï¿½ï¿½Î»:ms',
    recover_time         datetime,
    disconnect_time      datetime,
-   type                 int comment 'pc£¬Â·ÓÉ¡£¡£¡£¿ÉÔÚÏµÍ³ÖĞÔö¼ÓÀàĞÍ£¬²»Í¬ÀàĞÍ²»Í¬ico/Í¼Æ¬',
-   yn                   int comment '1:¿ÉÓÃ£»0:Í£ÓÃ',
+   type                 int comment 'pcï¿½ï¿½Â·ï¿½É¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Í²ï¿½Í¬ico/Í¼Æ¬',
+   yn                   int comment '1:ï¿½ï¿½ï¿½Ã£ï¿½0:Í£ï¿½ï¿½',
    icon                 varchar(50),
-   disconnect_times     int comment 'ÔÚÎ»ÖÃ½ÚµãÉèÖÃ£¬ÏÂÃæËùÓĞÉè±¸ÉúĞ§',
-   is_location          int comment '1:Î»ÖÃ£¬0:Éè±¸',
+   disconnect_times     int comment 'ï¿½ï¿½Î»ï¿½Ã½Úµï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½Ğ§',
+   is_location          int comment '1:Î»ï¿½Ã£ï¿½0:ï¿½è±¸',
    primary key (id)
 );
 
@@ -167,8 +167,8 @@ create table person
 (
    id                   bigint not null auto_increment,
    name                 varchar(20),
-   mobilephone          varchar(100) comment '¶à¸öÒÔ¶ººÅ·Ö¸ô',
-   telephone            varchar(20) comment '¶à¸öÒÔ¶ººÅ·Ö¸ô',
+   mobilephone          varchar(100) comment 'ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½Å·Ö¸ï¿½',
+   telephone            varchar(20) comment 'ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½Å·Ö¸ï¿½',
    primary key (id)
 );
 
@@ -208,12 +208,12 @@ create table schedule_job
    updateTime           datetime,
    job_name             varchar(40),
    job_group            varchar(40),
-   job_status           int comment 'ÊÇ·ñÆô¶¯ÈÎÎñ',
+   job_status           int comment 'ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
    cron_expression      varchar(40),
    repeat_interval      int,
    start_delay          int,
    description          varchar(200),
-   bean_class           varchar(100) comment 'ÈÎÎñÖ´ĞĞÊ±µ÷ÓÃÄÄ¸öÀàµÄ·½·¨ °üÃû+ÀàÃû',
+   bean_class           varchar(100) comment 'ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½+ï¿½ï¿½ï¿½ï¿½',
    is_concurrent        int,
    spring_id            varchar(40),
    method_name          varchar(40),
@@ -235,40 +235,3 @@ create table system_config
    yn                   int,
    primary key (id)
 );
-
-alter table system_config comment 'ÅäÖÃÏµÍ³±äÁ¿,
-ÏµÍ³ÅäÖÃÒ»°ãÊÇËæÏµÍ³Æô¶¯Ê±¼ÓÔØÒ»´Î£¬ĞŞ¸ÄºóĞèÒªÖØÆôÏµÍ³¡£µ±È»²¿·ÖÊôĞÔ¿ÉÒÔ°´¿Í»§ĞèÇó¶¯Ì¬µ÷Õû¡£';
-
-alter table data_dictionary_value add constraint FK_Reference_7 foreign key (dd_id)
-      references data_dictionary (id) on delete restrict on update restrict;
-
-alter table device_2_scheduel_job add constraint FK_Reference_5 foreign key (device_id)
-      references device (id) on delete restrict on update restrict;
-
-alter table device_2_scheduel_job add constraint FK_Reference_6 foreign key (scheduel_job_id)
-      references schedule_job (id) on delete restrict on update restrict;
-
-alter table group_2_person add constraint FK_Reference_10 foreign key (person_id)
-      references person (id) on delete restrict on update restrict;
-
-alter table group_2_person add constraint FK_Reference_11 foreign key (group_id)
-      references groups (id) on delete restrict on update restrict;
-
-alter table groups_2_permission add constraint FK_Reference_8 foreign key (groups_id)
-      references groups (id) on delete restrict on update restrict;
-
-alter table groups_2_permission add constraint FK_Reference_9 foreign key (permission_id)
-      references permission (id) on delete restrict on update restrict;
-
-alter table location_2_user add constraint FK_Reference_12 foreign key (location_id)
-      references device (id) on delete restrict on update restrict;
-
-alter table location_2_user add constraint FK_Reference_4 foreign key (user_id)
-      references person (id) on delete restrict on update restrict;
-
-alter table ping_server_2_device add constraint FK_Reference_1 foreign key (device_id)
-      references device (id) on delete restrict on update restrict;
-
-alter table ping_server_2_device add constraint FK_Reference_2 foreign key (ping_server_id)
-      references ping_server (id) on delete restrict on update restrict;
-
