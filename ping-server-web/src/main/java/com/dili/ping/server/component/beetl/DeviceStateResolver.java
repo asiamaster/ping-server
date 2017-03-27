@@ -15,7 +15,7 @@ public class DeviceStateResolver implements VirtualAttributeResolver {
     public String resolve(Object o, String attrName) {
         Device user = (Device) o;
         if(attrName.equals("state") && user.getYn() != null)
-        return DeviceStateEnum.getDeviceStateEnum(user.getYn()).getDesc();
+            return DeviceStateEnum.getDeviceStateEnum(user.getYn()).getDesc();
         return "";
     }
 

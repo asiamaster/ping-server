@@ -1,10 +1,12 @@
 <#body>
+
+    <#js/>
 此示例演示:beetl循环、虚拟属性、函数和日期转换<br/>
 说明：虚拟属性使用~符号，函数名称为springId<br/>
 序号 | 设备状态(虚拟属性) | id(元)(函数) | 启动时间(日期转换)<br/>
 <% for(data in devices){
 if(dataLP.index%2==0){%>
-    奇行:${dataLP.index}| &nbsp;&nbsp;&nbsp;&nbsp; ${data.~state} &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; ${centToYuan(data.id)} &nbsp;|&nbsp;&nbsp; ${data.launchTime,dateFormat="yyyy-MM-dd HH:mm:ss"}<br/>
+    奇行:${dataLP.index}| &nbsp;&nbsp;&nbsp;&nbsp; ${data.~state} &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; ${centToYuanFunction(data.id)} &nbsp;|&nbsp;&nbsp; ${data.launchTime,dateFormat="yyyy-MM-dd HH:mm:ss"}<br/>
 <%}else{%>
     偶行:${dataLP.index}| &nbsp;&nbsp;&nbsp;&nbsp; ${data.~state} &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; ${centToYuan(data.id)} &nbsp;|&nbsp;&nbsp; ${data.launchTime,dateFormat="yyyy-MM-dd HH:mm:ss"}<br/>
 <%}}%>
