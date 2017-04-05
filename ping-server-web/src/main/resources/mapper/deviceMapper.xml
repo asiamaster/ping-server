@@ -1,22 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapper.DeviceMapper">
-  <resultMap id="BaseResultMap" type="com.dili.ping.server.domain.Device">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dili.ping.server.dao.DeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.dili.ping.server.domain.Device" >
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="cost" jdbcType="BIGINT" property="cost" />
-    <result column="host" jdbcType="VARCHAR" property="host" />
-    <result column="port" jdbcType="INTEGER" property="port" />
-    <result column="running" jdbcType="BIT" property="running" />
-    <result column="launch_time" jdbcType="TIMESTAMP" property="launchTime" />
-    <result column="recover_time" jdbcType="TIMESTAMP" property="recoverTime" />
-    <result column="disconnect_time" jdbcType="TIMESTAMP" property="disconnectTime" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="yn" jdbcType="INTEGER" property="yn" />
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="host" property="host" jdbcType="VARCHAR" />
+    <result column="port" property="port" jdbcType="INTEGER" />
+    <result column="running_state" property="runningState" jdbcType="BIT" />
+    <result column="launch_time" property="launchTime" jdbcType="TIMESTAMP" />
+    <result column="cost" property="cost" jdbcType="BIGINT" />
+    <result column="recover_time" property="recoverTime" jdbcType="TIMESTAMP" />
+    <result column="disconnect_time" property="disconnectTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="yn" property="yn" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="disconnect_times" property="disconnectTimes" jdbcType="INTEGER" />
+    <result column="is_location" property="isLocation" jdbcType="INTEGER" />
   </resultMap>
-
 </mapper>

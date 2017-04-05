@@ -2,7 +2,6 @@ package com.dili.ping.server.domain;
 
 import java.util.Date;
 import javax.persistence.*;
-
 public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,11 +12,6 @@ public class Device {
 
     private String name;
 
-    /**
-     * 最后一次响应时长(ms)
-     */
-    private Long cost;
-
     private String host;
 
     private Integer port;
@@ -25,10 +19,16 @@ public class Device {
     /**
      * 1:运行，0:未运行
      */
-    private Boolean running;
+    @Column(name = "running_state")
+    private Boolean runningState;
 
     @Column(name = "launch_time")
     private Date launchTime;
+
+    /**
+     * 单位:ms
+     */
+    private Long cost;
 
     @Column(name = "recover_time")
     private Date recoverTime;
@@ -45,6 +45,20 @@ public class Device {
      * 1:可用；0:停用
      */
     private Integer yn;
+
+    private String icon;
+
+    /**
+     * 在位置节点设置，下面所有设备生效
+     */
+    @Column(name = "disconnect_times")
+    private Integer disconnectTimes;
+
+    /**
+     * 1:位置，0:设备
+     */
+    @Column(name = "is_location")
+    private Integer isLocation;
 
     /**
      * @return id
@@ -89,24 +103,6 @@ public class Device {
     }
 
     /**
-     * 获取最后一次响应时长(ms)
-     *
-     * @return cost - 最后一次响应时长(ms)
-     */
-    public Long getCost() {
-        return cost;
-    }
-
-    /**
-     * 设置最后一次响应时长(ms)
-     *
-     * @param cost 最后一次响应时长(ms)
-     */
-    public void setCost(Long cost) {
-        this.cost = cost;
-    }
-
-    /**
      * @return host
      */
     public String getHost() {
@@ -137,19 +133,19 @@ public class Device {
     /**
      * 获取1:运行，0:未运行
      *
-     * @return running - 1:运行，0:未运行
+     * @return running_state - 1:运行，0:未运行
      */
-    public Boolean getRunning() {
-        return running;
+    public Boolean getRunningState() {
+        return runningState;
     }
 
     /**
      * 设置1:运行，0:未运行
      *
-     * @param running 1:运行，0:未运行
+     * @param runningState 1:运行，0:未运行
      */
-    public void setRunning(Boolean running) {
-        this.running = running;
+    public void setRunningState(Boolean runningState) {
+        this.runningState = runningState;
     }
 
     /**
@@ -164,6 +160,24 @@ public class Device {
      */
     public void setLaunchTime(Date launchTime) {
         this.launchTime = launchTime;
+    }
+
+    /**
+     * 获取单位:ms
+     *
+     * @return cost - 单位:ms
+     */
+    public Long getCost() {
+        return cost;
+    }
+
+    /**
+     * 设置单位:ms
+     *
+     * @param cost 单位:ms
+     */
+    public void setCost(Long cost) {
+        this.cost = cost;
     }
 
     /**
@@ -228,5 +242,55 @@ public class Device {
      */
     public void setYn(Integer yn) {
         this.yn = yn;
+    }
+
+    /**
+     * @return icon
+     */
+    public String getIcon() {
+        return icon;
+    }
+
+    /**
+     * @param icon
+     */
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    /**
+     * 获取在位置节点设置，下面所有设备生效
+     *
+     * @return disconnect_times - 在位置节点设置，下面所有设备生效
+     */
+    public Integer getDisconnectTimes() {
+        return disconnectTimes;
+    }
+
+    /**
+     * 设置在位置节点设置，下面所有设备生效
+     *
+     * @param disconnectTimes 在位置节点设置，下面所有设备生效
+     */
+    public void setDisconnectTimes(Integer disconnectTimes) {
+        this.disconnectTimes = disconnectTimes;
+    }
+
+    /**
+     * 获取1:位置，0:设备
+     *
+     * @return is_location - 1:位置，0:设备
+     */
+    public Integer getIsLocation() {
+        return isLocation;
+    }
+
+    /**
+     * 设置1:位置，0:设备
+     *
+     * @param isLocation 1:位置，0:设备
+     */
+    public void setIsLocation(Integer isLocation) {
+        this.isLocation = isLocation;
     }
 }

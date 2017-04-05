@@ -6,10 +6,8 @@ import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.util.List;
@@ -86,7 +84,7 @@ public class PingScheduleExecutor {
                     completionService.submit(
                             () -> {
                                 long start = System.currentTimeMillis();
-                                client.setRunning(PingUtil.isPing(client.getHost()));
+                                client.setRunning(PingUtil.isReachable(client.getHost()));
                                 client.setCost(System.currentTimeMillis()-start);
                                 return client;
                             }

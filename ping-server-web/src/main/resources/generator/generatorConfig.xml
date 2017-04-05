@@ -24,14 +24,14 @@
 
         <sqlMapGenerator targetPackage="${targetXMLPackage}"  targetProject="${targetResourcesProject}"/>
 
-        <!--<javaClientGenerator targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}" type="XMLMAPPER" />-->
+        <javaClientGenerator targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}" type="XMLMAPPER" />
 
-        <!--<table tableName="%">-->
-            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
-        <!--</table>-->
-
-        <table domainObjectName="Device" tableName="device">
+        <table tableName="%">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
+
+        <!--<table domainObjectName="Device" tableName="device">-->
+            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>

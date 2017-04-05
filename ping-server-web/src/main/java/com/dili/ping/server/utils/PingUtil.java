@@ -6,7 +6,7 @@ import java.net.UnknownHostException;
 
 public class PingUtil{
     private static final int timeOut = 3000; //超时应该在3钞以上
-    public static boolean isPing(String ip)
+    public static boolean isReachable(String ip)
     {
         boolean status = false;
         if(ip != null)

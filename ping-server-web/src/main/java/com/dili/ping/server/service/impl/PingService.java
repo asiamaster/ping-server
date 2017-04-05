@@ -3,15 +3,12 @@ package com.dili.ping.server.service.impl;
 import com.dili.ping.server.constants.PingConstants;
 import com.dili.ping.server.dao.DeviceMapper;
 import com.dili.ping.server.domain.Device;
-import com.dili.ping.server.schedule.PingScheduleExecutor;
 import com.dili.ping.server.utils.PingUtil;
 import io.reactivex.Flowable;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -57,7 +54,8 @@ public class PingService {
             LOGGER.warn("[PingServer]获取运行机器名失败，发生异常：" + e.getMessage());
             serverName = "";
         }
-        executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
+//        executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
+        executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(10000));
         executor.allowCoreThreadTimeOut(true);
         executor.setRejectedExecutionHandler(new RejectedExecutionHandler() {
             @Override
@@ -94,9 +92,8 @@ public class PingService {
                 completionService.submit(
                         () -> {
                             long start = System.currentTimeMillis();
-                            device.setRunning(PingUtil.isPing(device.getHost()));
+                            device.setRunningState(PingUtil.isReachable(device.getHost()));
                             device.setCost(System.currentTimeMillis() - start);
-                            Thread.sleep(3000);
                             return device;
                         }
                 );
@@ -104,7 +101,7 @@ public class PingService {
             System.out.println("===================================");
             for (int i = 0; i < devices.size(); i++) {
                 Device device = completionService.take().get();
-                System.out.println("ping " + device.getHost() + ",running:" + device.getRunning() + ",cost:" + device.getCost() + "ms");
+                System.out.println("ping " + device.getHost() + ",running:" + device.getRunningState() + ",cost:" + device.getCost() + "ms");
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -12,9 +12,11 @@ import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfigurati
 import org.springframework.boot.autoconfigure.velocity.VelocityAutoConfiguration;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import tk.mybatis.mapper.provider.base.BaseSelectProvider;
 
 /**
  * Created by asiamastor on 2016/12/21.
@@ -30,7 +32,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAutoConfiguration(exclude = {ThymeleafAutoConfiguration.class, VelocityAutoConfiguration.class})
 @MapperScan(basePackages = "com.dili.ping.server.dao", markerInterface = MyMapper.class)
 //@ImportResource(locations = "classpath:applicationContext.xml")
-@ComponentScan(basePackages={"com.dili.utils","com.dili.ping.server"})
+//@ComponentScan(basePackages={"com.dili.utils","com.dili.ping.server"}, excludeFilters = {@ComponentScan.Filter(type= FilterType.ASSIGNABLE_TYPE,value=MyMapper.class)})
 @Import({SchedulerConfig.class})
 /**
  * 除了内嵌容器的部署模式，Spring Boot也支持将应用部署至已有的Tomcat容器, 或JBoss, WebLogic等传统Java EE应用服务器。
@@ -41,11 +43,11 @@ public class Application extends SpringBootServletInitializer {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
             SpringApplication.run(Application.class, args);
-
+//        Class.forName(BaseSelectProvider.class.getName()).newInstance();
 //        long old = System.currentTimeMillis();
-//        System.out.println(PingUtil.isPing("10.28.6.50"));
+//        System.out.println(PingUtil.isReachable("10.28.6.50"));
 //        System.out.println("cost:"+(System.currentTimeMillis()-old));
     }
 
