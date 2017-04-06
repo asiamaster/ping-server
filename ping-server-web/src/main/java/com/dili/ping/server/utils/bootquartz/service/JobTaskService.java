@@ -120,7 +120,6 @@ public class JobTaskService implements ApplicationListener<ContextRefreshedEvent
             } else {
                 scheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCronExpression());
             }
-
             if (job.getStartDelay() != null && job.getStartDelay() > 0) {
                 Long startDelayTime = System.currentTimeMillis() + (job.getStartDelay() * 1000);
                 trigger = TriggerBuilder.newTrigger().withIdentity(job.getJobName(), job.getJobGroup()).startAt(new Date(startDelayTime)).withSchedule(scheduleBuilder).build();
@@ -150,7 +149,6 @@ public class JobTaskService implements ApplicationListener<ContextRefreshedEvent
             jobDetail.getJobDataMap().put(PingConstants.jobDataMapScheduleJobKey, job);
             jobDetail.getJobDataMap().put(PingConstants.jobDataMapTargetIdsKey, currentTargetIds);
             jobDetail.getJobDataMap().put(PingConstants.jobDataMapSheduelTimesKey,job.getJobGroup()+job.getJobName());
-
             scheduler.addJob(jobDetail, true);
             // 按新的trigger重新设置job执行
             scheduler.rescheduleJob(triggerKey, trigger);
