@@ -6,17 +6,12 @@ import com.dili.ping.server.service.DeviceService;
 import com.dili.ping.server.utils.bootquartz.domain.ScheduleJob;
 import com.dili.ping.server.utils.bootquartz.service.JobTaskService;
 import com.google.common.collect.Lists;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -121,6 +116,7 @@ public class PingController {
         model.put("result","刷新完成!");
         return "result";
     }
+
     @RequestMapping("/beetl")
     public String beetl( ModelMap model) {
         List<Device> devices = Lists.newArrayList();
@@ -136,7 +132,6 @@ public class PingController {
         device.setLaunchTime(new Date(System.currentTimeMillis()-3600000l));
         model.put("devices", devices);
         model.put("result","刷新完成!");
-
         return "beetl";
     }
 

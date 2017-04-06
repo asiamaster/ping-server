@@ -11,12 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration;
 import org.springframework.boot.autoconfigure.velocity.VelocityAutoConfiguration;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import tk.mybatis.mapper.provider.base.BaseSelectProvider;
 
 /**
  * Created by asiamastor on 2016/12/21.
@@ -43,12 +39,8 @@ public class Application extends SpringBootServletInitializer {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
 
-    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public static void main(String[] args) {
             SpringApplication.run(Application.class, args);
-//        Class.forName(BaseSelectProvider.class.getName()).newInstance();
-//        long old = System.currentTimeMillis();
-//        System.out.println(PingUtil.isReachable("10.28.6.50"));
-//        System.out.println("cost:"+(System.currentTimeMillis()-old));
     }
 
 
