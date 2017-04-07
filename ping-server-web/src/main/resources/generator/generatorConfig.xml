@@ -10,8 +10,26 @@
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
+        <!--Mapper插件 -->
         <plugin type="${mapper.plugin}">
             <property name="mappers" value="${mapper.Mapper}"/>
+        </plugin>
+
+        <!-- Mybatis配置文件生成插件 -->
+        <plugin type="com.dili.utils.mbg.MyMapperConfigPlugin">
+            <property name="targetProject" value="${targetResourcesProject}"></property>
+            <property name="targetPackage" value="/"></property>
+            <property name="fileName" value="mybatis-config.xml" />
+        </plugin>
+
+        <!-- Service生成插件 -->
+        <plugin type="com.dili.utils.mbg.MyServicePlugin">
+            <property name="targetProject" value="${targetJavaProject}"></property>
+            <property name="targetPackage" value="${targetServicePackage}"></property>
+            <!-- 如果不配置，则不会在类上继承 -->
+            <property name="serviceSuperClass" value="com.dili.utils.base.BaseServiceImpl"></property>
+            <!-- 如果不配置，则不会在接口上继承 -->
+            <property name="serviceSuperInterface" value="com.dili.utils.base.BaseService"></property>
         </plugin>
 
         <jdbcConnection driverClass="${jdbc.driverClass}"
@@ -26,12 +44,12 @@
 
         <javaClientGenerator targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}" type="XMLMAPPER" />
 
-        <table tableName="%">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-
-        <!--<table domainObjectName="Device" tableName="device">-->
+        <!--<table tableName="%">-->
             <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
         <!--</table>-->
+
+        <table domainObjectName="Device" tableName="device">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
     </context>
 </generatorConfiguration>

@@ -17,6 +17,7 @@
 		<targetJavaProject>${basedir}/src/main/java</targetJavaProject>
 		<targetMapperPackage>com.dili.ping.server.dao</targetMapperPackage>
 		<targetModelPackage>com.dili.ping.server.domain</targetModelPackage>
+		<targetServicePackage>com.dili.ping.server.service</targetServicePackage>
 		<!--  XML生成路径  -->
 		<targetResourcesProject>${basedir}/src/main/resources</targetResourcesProject>
 		<targetXMLPackage>mapper</targetXMLPackage>

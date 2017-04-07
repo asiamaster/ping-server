@@ -2,6 +2,7 @@ package com.dili.ping.server.domain;
 
 import java.util.Date;
 import javax.persistence.*;
+
 public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,7 +62,7 @@ public class Device {
     private Integer isLocation;
 
     /**
-     * 子网掩码
+     * 子网掩码，用于区分网段
      */
     @Column(name = "mask_code")
     private String maskCode;
@@ -300,10 +301,20 @@ public class Device {
         this.isLocation = isLocation;
     }
 
+    /**
+     * 获取子网掩码，用于区分网段
+     *
+     * @return mask_code - 子网掩码，用于区分网段
+     */
     public String getMaskCode() {
         return maskCode;
     }
 
+    /**
+     * 设置子网掩码，用于区分网段
+     *
+     * @param maskCode 子网掩码，用于区分网段
+     */
     public void setMaskCode(String maskCode) {
         this.maskCode = maskCode;
     }

@@ -53,8 +53,7 @@ public class PingService {
         } catch (Exception e) {
             LOGGER.warn("[PingServer]获取运行机器名失败，发生异常：" + e.getMessage());
             serverName = "";
-        }
-//        executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
+        }//        executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
         executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(10000));
         executor.allowCoreThreadTimeOut(true);
         executor.setRejectedExecutionHandler(new RejectedExecutionHandler() {

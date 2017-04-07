@@ -1,22 +1,11 @@
 package com.dili.ping.server.service;
 
 import com.dili.ping.server.domain.Device;
-
-import java.util.List;
+import com.dili.utils.base.BaseService;
 
 /**
- * Created by asiam on 2017/3/27 0027.
+ * 由MyBatis Generator工具自动生成
+ * This file was generated on 2017-04-07 17:43:17.
  */
-public interface DeviceService {
-
-    public List<Device> list(Device device);
-
-    public int insert(Device device);
-
-    public int del(Long id);
-
-    public int deleteList(List<Long> ids);
-
-    public int insertList(List<Device> devices);
-
+public interface DeviceService extends BaseService<Device, Long> {
 }
