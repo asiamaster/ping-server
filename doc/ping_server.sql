@@ -86,6 +86,7 @@ create table device
    icon                 varchar(50),
    disconnect_times     int comment '��λ�ýڵ����ã����������豸��Ч',
    is_location          int comment '1:λ�ã�0:�豸',
+   mask_code          varchar(15),
    primary key (id)
 );
 

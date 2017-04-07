@@ -61,6 +61,12 @@ public class Device {
     private Integer isLocation;
 
     /**
+     * 子网掩码
+     */
+    @Column(name = "mask_code")
+    private String maskCode;
+
+    /**
      * @return id
      */
     public Long getId() {
@@ -292,5 +298,13 @@ public class Device {
      */
     public void setIsLocation(Integer isLocation) {
         this.isLocation = isLocation;
+    }
+
+    public String getMaskCode() {
+        return maskCode;
+    }
+
+    public void setMaskCode(String maskCode) {
+        this.maskCode = maskCode;
     }
 }
