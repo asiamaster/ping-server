@@ -3,7 +3,7 @@ package com.dili.ping.server.utils.bootquartz;
 import com.dili.ping.server.constants.PingConstants;
 import com.dili.ping.server.utils.bootquartz.domain.ScheduleJob;
 import com.dili.utils.SpringUtil;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import java.lang.reflect.InvocationTargetException;

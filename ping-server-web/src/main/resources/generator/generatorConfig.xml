@@ -6,7 +6,7 @@
 <generatorConfiguration>
     <properties resource="generator-config.properties"/>
 
-    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+    <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
@@ -16,14 +16,14 @@
         </plugin>
 
         <!-- Mybatis配置文件生成插件 -->
-        <plugin type="com.dili.utils.mbg.MyMapperConfigPlugin">
+        <plugin type="${myMapperConfig.Plugin}">
             <property name="targetProject" value="${targetResourcesProject}"></property>
             <property name="targetPackage" value="/"></property>
             <property name="fileName" value="mybatis-config.xml" />
         </plugin>
 
         <!-- Service生成插件 -->
-        <plugin type="com.dili.utils.mbg.MyServicePlugin">
+        <plugin type="${myService.Plugin}">
             <property name="targetProject" value="${targetJavaProject}"></property>
             <property name="targetPackage" value="${targetServicePackage}"></property>
             <!-- 如果不配置，则不会在类上继承 -->
@@ -31,6 +31,29 @@
             <!-- 如果不配置，则不会在接口上继承 -->
             <property name="serviceSuperInterface" value="com.dili.utils.base.BaseService"></property>
         </plugin>
+
+        <!-- Controller生成插件 -->
+        <plugin type="${myController.Plugin}">
+            <property name="targetProject" value="${targetJavaProject}"></property>
+            <property name="targetPackage" value="${targetControllerPackage}"></property>
+            <!-- 如果不配置，则不会在类上继承 -->
+            <!--<property name="controllerSuperClass" value="com.dili.utils.base.BaseControllerImpl"></property>-->
+            <!-- 如果不配置，则不会在接口上继承 -->
+            <!--<property name="controllerSuperInterface" value="com.dili.utils.base.BaseController"></property>-->
+        </plugin>
+
+        <!-- beetl模板文件生成插件 -->
+        <plugin type="com.dili.utils.mbg.beetl.BeetlTemplatesPlugin">
+            <property name="targetDir" value="${targetResourcesProject}"></property>
+            <property name="templateRootDir" value="${templateRootDir}"></property>
+        </plugin>
+
+        <commentGenerator type="org.mybatis.generator.internal.DefaultCommentGenerator">
+            <!--**阻止**生成注释，默认为false-->
+            <property name="suppressAllComments" value="false"/>
+            <!--**阻止**生成的注释包含时间戳，默认为false-->
+            <property name="suppressDate" value="false"/>
+        </commentGenerator>
 
         <jdbcConnection driverClass="${jdbc.driverClass}"
                         connectionURL="${jdbc.url}"
@@ -49,6 +72,9 @@
         <!--</table>-->
 
         <table domainObjectName="Device" tableName="device">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table domainObjectName="Person" tableName="person">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
     </context>

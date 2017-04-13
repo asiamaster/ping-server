@@ -5,7 +5,7 @@ import com.dili.ping.server.dao.DeviceMapper;
 import com.dili.ping.server.domain.Device;
 import com.dili.ping.server.utils.PingUtil;
 import io.reactivex.Flowable;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

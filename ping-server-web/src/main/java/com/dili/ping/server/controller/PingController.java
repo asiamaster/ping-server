@@ -1,6 +1,5 @@
 package com.dili.ping.server.controller;
 
-import com.dili.ping.server.dao.DeviceMapper;
 import com.dili.ping.server.domain.Device;
 import com.dili.ping.server.service.DeviceService;
 import com.dili.ping.server.utils.bootquartz.domain.ScheduleJob;
@@ -10,6 +9,7 @@ import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
@@ -24,8 +24,7 @@ public class PingController {
 
     @Autowired
     private JobTaskService jobTaskService;
-    @Autowired
-    private DeviceMapper mapper;
+
     @Autowired
     private DeviceService deviceService;
 //    @ApiOperation(value="mysql使用示例", notes="mysql使用示例")
@@ -118,7 +117,8 @@ public class PingController {
     }
 
     @RequestMapping("/beetl")
-    public String beetl( ModelMap model) {
+    public String beetl(@ModelAttribute Device deivce, ModelMap model) {
+
         List<Device> devices = Lists.newArrayList();
         Device device = new Device();
         device.setYn(1);
@@ -130,6 +130,8 @@ public class PingController {
         devices.add(device);
         device.setId(360l);
         device.setLaunchTime(new Date(System.currentTimeMillis()-3600000l));
+        List<Long> ids = Lists.newArrayList(1l);
+        deviceService.del(ids);
         model.put("devices", devices);
         model.put("result","刷新完成!");
         return "beetl";
@@ -154,7 +156,7 @@ public class PingController {
                 ds.add(d);
             }
         }
-        deviceService.insertList(ds);
+        deviceService.batchInsert(ds);
         model.put("result","设备添加完成!");
         return "result";
     }

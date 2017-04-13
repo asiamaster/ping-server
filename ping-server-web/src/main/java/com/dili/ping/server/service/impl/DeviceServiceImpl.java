@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 /**
  * 由MyBatis Generator工具自动生成
- * This file was generated on 2017-04-07 17:43:17.
+ * This file was generated on 2017-04-13 10:35:32.
  */
 @Service
-public class DeviceServiceImpl extends BaseServiceImpl<Device, Long> implements DeviceService {
+public class DeviceServiceImpl extends com.dili.utils.base.BaseServiceImpl<Device, Long> implements DeviceService {
 }

@@ -18,6 +18,8 @@
 		<targetMapperPackage>com.dili.ping.server.dao</targetMapperPackage>
 		<targetModelPackage>com.dili.ping.server.domain</targetModelPackage>
 		<targetServicePackage>com.dili.ping.server.service</targetServicePackage>
+		<targetControllerPackage>com.dili.ping.server.controller</targetControllerPackage>
+		<templateRootDir>${basedir}/mbg-templates</templateRootDir>
 		<!--  XML生成路径  -->
 		<targetResourcesProject>${basedir}/src/main/resources</targetResourcesProject>
 		<targetXMLPackage>mapper</targetXMLPackage>
@@ -36,7 +38,22 @@
 	<modules>
 		<module>ping-server-web</module>
 	</modules>
-	
+	<!--<distributionManagement>-->
+		<!--<repository>-->
+			<!--<id>nexus-releases</id>-->
+			<!--<name>Nexus Release Repository</name>-->
+			<!--<url>-->
+				<!--http://127.0.0.1:8081/nexus/content/repositories/releases/-->
+			<!--</url>-->
+		<!--</repository>-->
+		<!--<snapshotRepository>-->
+			<!--<id>nexus-snapshots</id>-->
+			<!--<name>Nexus Snapshot Repository</name>-->
+			<!--<url>-->
+				<!--http://127.0.0.1:8081/nexus/content/repositories/snapshots/-->
+			<!--</url>-->
+		<!--</snapshotRepository>-->
+	<!--</distributionManagement>-->
 	<!--地利-->
 	<distributionManagement>
         <repository>

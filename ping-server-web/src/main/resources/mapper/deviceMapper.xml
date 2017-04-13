@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dili.ping.server.dao.DeviceMapper">
-
   <resultMap id="BaseResultMap" type="com.dili.ping.server.domain.Device">
     <!--
       WARNING - @mbg.generated
@@ -23,24 +22,76 @@
     <result column="is_location" jdbcType="INTEGER" property="isLocation" />
     <result column="mask_code" jdbcType="VARCHAR" property="maskCode" />
   </resultMap>
-
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
-    select id, parent_id, name, host, port, running_state, launch_time, cost, recover_time, 
+    id, parent_id, name, host, port, running_state, launch_time, cost, recover_time, 
     disconnect_time, type, yn, icon, disconnect_times, is_location, mask_code
+  </sql>
+  <select id="selectBy" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
     from device
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
+  <update id="updateBy" parameterType="com.dili.ping.server.domain.Device">
     <!--
       WARNING - @mbg.generated
     -->
-    select id, parent_id, name, host, port, running_state, launch_time, cost, recover_time, 
-    disconnect_time, type, yn, icon, disconnect_times, is_location, mask_code
-    from device
-  </select>
+    update device
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null">
+        host = #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        port = #{port,jdbcType=INTEGER},
+      </if>
+      <if test="runningState != null">
+        running_state = #{runningState,jdbcType=BIT},
+      </if>
+      <if test="launchTime != null">
+        launch_time = #{launchTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=BIGINT},
+      </if>
+      <if test="recoverTime != null">
+        recover_time = #{recoverTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="disconnectTime != null">
+        disconnect_time = #{disconnectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="yn != null">
+        yn = #{yn,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="disconnectTimes != null">
+        disconnect_times = #{disconnectTimes,jdbcType=INTEGER},
+      </if>
+      <if test="isLocation != null">
+        is_location = #{isLocation,jdbcType=INTEGER},
+      </if>
+      <if test="maskCode != null">
+        mask_code = #{maskCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 
 
 </mapper>

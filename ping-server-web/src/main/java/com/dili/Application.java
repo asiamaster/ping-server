@@ -2,6 +2,7 @@ package com.dili;
 
 import com.dili.ping.server.utils.bootquartz.SchedulerConfig;
 import com.dili.utils.base.MyMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,8 +37,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * 继承SpringBootServletInitializer
  */
 public class Application extends SpringBootServletInitializer {
-
-    protected static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) {
             SpringApplication.run(Application.class, args);

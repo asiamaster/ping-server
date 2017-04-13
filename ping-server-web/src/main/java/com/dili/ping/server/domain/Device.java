@@ -3,6 +3,11 @@ package com.dili.ping.server.domain;
 import java.util.Date;
 import javax.persistence.*;
 
+/**
+ * 由MyBatis Generator工具自动生成
+ * 
+ * This file was generated on 2017-04-13 10:35:32.
+ */
 public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

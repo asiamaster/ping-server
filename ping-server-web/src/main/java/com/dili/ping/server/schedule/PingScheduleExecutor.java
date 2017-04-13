@@ -3,7 +3,7 @@ package com.dili.ping.server.schedule;
 import com.dili.ping.server.domain.Client;
 import com.dili.ping.server.utils.PingUtil;
 import com.google.common.collect.Lists;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
