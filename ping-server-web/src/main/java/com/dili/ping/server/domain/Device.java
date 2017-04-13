@@ -6,7 +6,7 @@ import javax.persistence.*;
 /**
  * 由MyBatis Generator工具自动生成
  * 
- * This file was generated on 2017-04-13 10:35:32.
+ * This file was generated on 2017-04-13 14:20:57.
  */
 public class Device {
     @Id
