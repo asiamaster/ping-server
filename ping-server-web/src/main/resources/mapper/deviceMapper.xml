@@ -29,14 +29,13 @@
     id, parent_id, name, host, port, running_state, launch_time, cost, recover_time, 
     disconnect_time, type, yn, icon, disconnect_times, is_location, mask_code
   </sql>
-  <select id="selectBy" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectChildren" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
     -->
-    select 
+    select
     <include refid="Base_Column_List" />
-    from device
-    where id = #{id,jdbcType=BIGINT}
+    from device FIND_IN_SET(id,getDeviceChildren(#{id}))
   </select>
   <update id="updateBy" parameterType="com.dili.ping.server.domain.Device">
     <!--
