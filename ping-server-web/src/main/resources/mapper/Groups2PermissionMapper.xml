@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dili.ping.server.dao.Groups2PermissionMapper">
+  <resultMap id="BaseResultMap" type="com.dili.ping.server.domain.Groups2Permission">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="groups_id" jdbcType="BIGINT" property="groupsId" />
+    <result column="permission_id" jdbcType="BIGINT" property="permissionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, groups_id, permission_id
+  </sql>
+  <select id="selectBy" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from groups_2_permission
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <update id="updateBy" parameterType="com.dili.ping.server.domain.Groups2Permission">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update groups_2_permission
+    <set>
+      <if test="groupsId != null">
+        groups_id = #{groupsId,jdbcType=BIGINT},
+      </if>
+      <if test="permissionId != null">
+        permission_id = #{permissionId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

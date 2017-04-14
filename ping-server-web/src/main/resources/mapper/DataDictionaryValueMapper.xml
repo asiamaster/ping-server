@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dili.ping.server.dao.DataDictionaryValueMapper">
+  <resultMap id="BaseResultMap" type="com.dili.ping.server.domain.DataDictionaryValue">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="dd_id" jdbcType="BIGINT" property="ddId" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="period_begin" jdbcType="TIMESTAMP" property="periodBegin" />
+    <result column="period_end" jdbcType="TIMESTAMP" property="periodEnd" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+    <result column="yn" jdbcType="INTEGER" property="yn" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, dd_id, sort, code, value, remark, period_begin, period_end, created, modified, 
+    yn
+  </sql>
+  <select id="selectBy" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from data_dictionary_value
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <update id="updateBy" parameterType="com.dili.ping.server.domain.DataDictionaryValue">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    update data_dictionary_value
+    <set>
+      <if test="ddId != null">
+        dd_id = #{ddId,jdbcType=BIGINT},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        value = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="periodBegin != null">
+        period_begin = #{periodBegin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="periodEnd != null">
+        period_end = #{periodEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="yn != null">
+        yn = #{yn,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

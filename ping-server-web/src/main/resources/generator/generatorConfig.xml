@@ -19,11 +19,11 @@
         <!-- Mybatis配置文件生成插件 -->
         <!-- targetProject和targetPackage必填 -->
         <!-- fileName不填默认为mybatis-config.xml -->
-        <plugin type="${myMapperConfig.Plugin}">
-            <property name="targetProject" value="${targetResourcesProject}"></property>
-            <property name="targetPackage" value="/"></property>
-            <property name="fileName" value="mybatis-config.xml" />
-        </plugin>
+        <!--<plugin type="${myMapperConfig.Plugin}">-->
+            <!--<property name="targetProject" value="${targetResourcesProject}"></property>-->
+            <!--<property name="targetPackage" value="/"></property>-->
+            <!--<property name="fileName" value="mybatis-config.xml" />-->
+        <!--</plugin>-->
 
         <!-- Service生成插件 -->
         <!-- targetProject和targetPackage必填 -->
@@ -48,8 +48,6 @@
         </plugin>
 
         <!-- beetl模板文件生成插件 -->
-        <!-- targetDir和templateRootDir必填 -->
-        <!-- overwrite属性默认为false，这里无法获取maven plugin中配置的overwrite属性，需要单独解析 -->
         <plugin type="com.dili.utils.mbg.beetl.BeetlTemplatesPlugin">
             <property name="targetDir" value="${targetResourcesProject}"></property>
             <property name="templateRootDir" value="${templateRootDir}"></property>
@@ -76,15 +74,15 @@
         <javaClientGenerator targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}" type="XMLMAPPER" />
 
         <!-- 生成所有表模型 -->
-        <!--<table tableName="%">-->
+        <table tableName="%">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <!-- 生成指定表模型 -->
+        <!--<table domainObjectName="Device" tableName="device">-->
             <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
         <!--</table>-->
-        <!-- 生成指定表模型 -->
-        <table domainObjectName="Device" tableName="device">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table domainObjectName="Person" tableName="person">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
+        <!--<table domainObjectName="Person" tableName="person">-->
+            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>

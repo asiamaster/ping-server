@@ -26,6 +26,7 @@ js,css, image等静态状态放`resources/static`目录下，建议再建一级�
 - javaModelGenerator配置实体生成，如果有原文件则覆盖;
 - sqlMapGenerator配置*Mapper.xml生成，如果有原文件则在后面append;
 - javaClientGenerator配置mapper文件生成，如果有原文件则覆盖;
+详细文档参见:http://c6acb441.wiz03.com/share/s/36Hbh1016kn82gwGTT28HQVA2is2jX3b3Aff2QdITw0_mYH2
 ### 6.beetl说明
 beetl总配置文件:`resources/beetl.properties`
 beetl全局变量:`resources/beetlSharedVars.properties`
