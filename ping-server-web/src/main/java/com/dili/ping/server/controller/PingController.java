@@ -1,19 +1,31 @@
 package com.dili.ping.server.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.dili.ping.server.dao.DeviceMapper;
 import com.dili.ping.server.domain.Device;
 import com.dili.ping.server.service.DeviceService;
+import com.dili.ping.server.utils.PingUtil;
 import com.dili.utils.quartz.domain.ScheduleJob;
+import com.dili.utils.quartz.domain.ScheduleMessage;
 import com.dili.utils.quartz.service.JobTaskService;
 import com.google.common.collect.Lists;
+import io.reactivex.Flowable;
 import org.quartz.SchedulerException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletionService;
+import java.util.concurrent.ExecutorCompletionService;
 
 /**
  * Created by asiam on 2017/3/21 0021.
@@ -22,11 +34,17 @@ import java.util.List;
 @RequestMapping()
 public class PingController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(PingController.class);
+
     @Autowired
     private JobTaskService jobTaskService;
 
     @Autowired
     private DeviceService deviceService;
+
+    @Autowired
+    private DeviceMapper mapper;
+
 //    @ApiOperation(value="mysql使用示例", notes="mysql使用示例")
 //    @ApiImplicitParams({
 //            @ApiImplicitParam(name = "id", paramType = "query",value = "用户ID", required = true, dataType = "id")
@@ -44,14 +62,58 @@ public class PingController {
 
         //这里先测试下刷新调度器是否成功
 
-        ScheduleJob scheduleJob = getJobByDeviceId(deviceId);
+        ScheduleJob scheduleJob = getRemoteJobByDeviceId(deviceId);
         try {
-            jobTaskService.addJob(scheduleJob, null, false);
+            jobTaskService.addJob(scheduleJob, false);
         } catch (SchedulerException e) {
             e.printStackTrace();
         }
         model.put("result","刷新完成!");
         return "result";
+    }
+
+    @RequestMapping("/ping")
+    public @ResponseBody void ping(@RequestBody ScheduleMessage scheduleMessage){
+        List<String> deviceIds = JSONArray.parseArray(scheduleMessage.getJobData(), String.class);
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        System.out.println("线程:"+Thread.currentThread().getName()+",当前调度Job:"+scheduleMessage.getJobGroup()+scheduleMessage.getJobName()+"运行第"+scheduleMessage.getSheduelTimes()+"次.");
+        Flowable.fromArray(deviceIds).subscribe(System.out::println);
+        try {
+            LOGGER.debug("[PingController]扫描待执行消息...");
+            if (deviceIds == null || deviceIds.isEmpty()) {
+                return;
+            }
+            LOGGER.debug("[PingController]待执行数：" + (deviceIds == null ? 0 : deviceIds.size()) + "条");
+            //获取设备
+            Example example = new Example(Device.class);
+            example.createCriteria().andIn("id", deviceIds);
+            example.orderBy("id").desc();
+            List<Device> devices = mapper.selectByExample(example);
+            System.out.println(devices.size());
+            return;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+    }
+
+    private ScheduleJob getRemoteJobByDeviceId(Long deviceId){
+        ScheduleJob scheduleJob = new ScheduleJob();
+        scheduleJob.setUrl("http://localhost:8082/ping");
+        scheduleJob.setCreateTime(new Date());
+        scheduleJob.setDescription("ping任务1");
+        scheduleJob.setId(1l);
+        scheduleJob.setIsConcurrent(0);
+        scheduleJob.setJobName("job1");
+        scheduleJob.setJobGroup("group1");
+        scheduleJob.setStartDelay(0);
+        scheduleJob.setRepeatInterval(2);
+        scheduleJob.setJobData(JSONArray.toJSONString(Lists.newArrayList(deviceId)));
+        return scheduleJob;
     }
 
     private ScheduleJob getJobByDeviceId(Long deviceId){
@@ -60,12 +122,13 @@ public class PingController {
         scheduleJob.setCreateTime(new Date());
         scheduleJob.setDescription("ping任务1");
         scheduleJob.setId(1l);
-        scheduleJob.setIsConcurrent(1);
+        scheduleJob.setIsConcurrent(0);
         scheduleJob.setJobName("job1");
         scheduleJob.setJobGroup("group1");
         scheduleJob.setMethodName("ping");
         scheduleJob.setStartDelay(0);
         scheduleJob.setRepeatInterval(2);
+        scheduleJob.setJobData(JSONArray.toJSONString(Lists.newArrayList(deviceId)));
         return scheduleJob;
     }
 
@@ -174,8 +237,9 @@ public class PingController {
         scheduleJob.setMethodName("ping");
         scheduleJob.setStartDelay(0);
         scheduleJob.setRepeatInterval(4);
+        scheduleJob.setJobData(JSONArray.toJSONString(Lists.newArrayList(3038l)));
         try {
-            jobTaskService.addJob(scheduleJob, Lists.newArrayList(3038l), true);
+            jobTaskService.addJob(scheduleJob, true);
         } catch (SchedulerException e) {
             e.printStackTrace();
         }

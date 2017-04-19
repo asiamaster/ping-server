@@ -1,9 +1,11 @@
 package com.dili.ping.server.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.dili.ping.server.constants.PingConstants;
 import com.dili.ping.server.dao.DeviceMapper;
 import com.dili.ping.server.domain.Device;
 import com.dili.ping.server.utils.PingUtil;
+import com.dili.utils.quartz.domain.QuartzConstants;
 import com.dili.utils.quartz.domain.ScheduleMessage;
 import io.reactivex.Flowable;
 import org.apache.commons.lang3.StringUtils;
@@ -77,10 +79,13 @@ public class PingService {
      */
     //    @Scheduled(fixedRate = 5000)
     public void ping(ScheduleMessage scheduleMessage) {
-        List<String> deviceIds = (List)scheduleMessage.getData();
-        String key = scheduleMessage.getJobDataMapSheduelTimesKey();
-        Integer callTimes = PingConstants.sheduelTimes.get(key);
-        System.out.println("线程:"+Thread.currentThread().getName()+",当前调度Job:"+key+"运行第"+callTimes+"次.");
+        List<String> deviceIds = JSONArray.parseArray(scheduleMessage.getJobData(), String.class);
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("线程:"+Thread.currentThread().getName()+",当前调度Job:"+scheduleMessage.getJobGroup()+scheduleMessage.getJobName()+"运行第"+scheduleMessage.getSheduelTimes()+"次.");
         Flowable.fromArray(deviceIds).subscribe(System.out::println);
         try {
             LOGGER.debug(serverName + "[PingServer]扫描待执行消息...");
