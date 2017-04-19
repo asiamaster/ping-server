@@ -6,7 +6,7 @@ import javax.persistence.*;
 /**
  * 由MyBatis Generator工具自动生成
  * 
- * This file was generated on 2017-04-14 16:26:15.
+ * This file was generated on 2017-04-19 08:57:24.
  */
 @Table(name = "schedule_job")
 public class ScheduleJob {
@@ -48,6 +48,11 @@ public class ScheduleJob {
      */
     @Column(name = "bean_class")
     private String beanClass;
+
+    /**
+     * 以后会支持远程调用restful url
+     */
+    private String url;
 
     @Column(name = "is_concurrent")
     private Integer isConcurrent;
@@ -218,6 +223,24 @@ public class ScheduleJob {
      */
     public void setBeanClass(String beanClass) {
         this.beanClass = beanClass;
+    }
+
+    /**
+     * 获取以后会支持远程调用restful url
+     *
+     * @return url - 以后会支持远程调用restful url
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * 设置以后会支持远程调用restful url
+     *
+     * @param url 以后会支持远程调用restful url
+     */
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     /**

@@ -1,7 +1,7 @@
 package com.dili.ping.server.service;
 
-import com.dili.ping.server.domain.ScheduleJob;
 import com.dili.utils.base.BaseService;
+import com.dili.utils.quartz.domain.ScheduleJob;
 
 /**
  * 由MyBatis Generator工具自动生成

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dili.ping.server.dao.GroupsMapper">
+<mapper namespace="mapper.GroupsMapper">
   <resultMap id="BaseResultMap" type="com.dili.ping.server.domain.Groups">
     <!--
       WARNING - @mbg.generated

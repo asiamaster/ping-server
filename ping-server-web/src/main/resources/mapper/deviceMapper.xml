@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dili.ping.server.dao.DeviceMapper">
+<mapper namespace="mapper.DeviceMapper">
   <resultMap id="BaseResultMap" type="com.dili.ping.server.domain.Device">
     <!--
       WARNING - @mbg.generated
@@ -35,7 +35,12 @@
     -->
     select
     <include refid="Base_Column_List" />
-    from device FIND_IN_SET(id,getDeviceChildren(#{id}))
+    from device
+    <where>
+      <if test="id != null">
+        FIND_IN_SET(id,getDeviceChildren(#{id}))
+      </if>
+    </where>
   </select>
   <update id="updateBy" parameterType="com.dili.ping.server.domain.Device">
     <!--

@@ -2,13 +2,17 @@ package com.dili.ping.server.controller;
 
 import com.dili.ping.server.domain.Device;
 import com.dili.ping.server.service.DeviceService;
+import com.dili.utils.domain.BaseOutput;
 import com.dili.utils.domain.ResponseMessage;
+import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Map;
 
 /**
  * 由MyBatis Generator工具自动生成
@@ -24,6 +28,13 @@ public class DeviceController {
     public String list(ModelMap modelMap, @ModelAttribute Device device) {
         modelMap.put("list", deviceService.list(device));
         return "device/list";
+    }
+
+    @RequestMapping("/get")
+    public @ResponseBody ResponseMessage get(Long id) {
+        Map map = Maps.newHashMap();
+        map.put("obj", deviceService.get(id));
+        return ResponseMessage.success().setData(map);
     }
 
     @RequestMapping("/listChildren")

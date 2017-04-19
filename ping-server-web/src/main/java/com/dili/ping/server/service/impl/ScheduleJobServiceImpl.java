@@ -1,9 +1,9 @@
 package com.dili.ping.server.service.impl;
 
 import com.dili.ping.server.dao.ScheduleJobMapper;
-import com.dili.ping.server.domain.ScheduleJob;
 import com.dili.ping.server.service.ScheduleJobService;
 import com.dili.utils.base.BaseServiceImpl;
+import com.dili.utils.quartz.domain.ScheduleJob;
 import org.springframework.stereotype.Service;
 
 /**

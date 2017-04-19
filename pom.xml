@@ -19,7 +19,8 @@
 		<targetModelPackage>com.dili.ping.server.domain</targetModelPackage>
 		<targetServicePackage>com.dili.ping.server.service</targetServicePackage>
 		<targetControllerPackage>com.dili.ping.server.controller</targetControllerPackage>
-		<templateRootDir>${basedir}/mbg-templates</templateRootDir>
+		<!--<templateRootDir>${basedir}/mbg-templates/springboot-base-0.0.1-SNAPSHOT/</templateRootDir>-->
+		<templateRootDir>${basedir}/lib/springboot-base-0.0.1-SNAPSHOT.jar</templateRootDir>
 		<!--  XML生成路径  -->
 		<targetResourcesProject>${basedir}/src/main/resources</targetResourcesProject>
 		<targetXMLPackage>mapper</targetXMLPackage>
@@ -39,39 +40,39 @@
 		<module>ping-server-web</module>
 	</modules>
 	<!-- 本机-->
-	<distributionManagement>
-		<repository>
-			<id>maven-releases</id>
-			<name>Nexus Release Repository</name>
-			<url>
-				http://localhost:8081/repository/maven-releases/
-			</url>
-		</repository>
-		<snapshotRepository>
-			<id>maven-snapshots</id>
-			<name>Nexus Snapshot Repository</name>
-			<url>
-				http://localhost:8081/repository/maven-snapshots/
-			</url>
-		</snapshotRepository>
-	</distributionManagement>
-	<!--地利-->
 	<!--<distributionManagement>-->
-        <!--<repository>-->
-            <!--<id>central</id>-->
-            <!--<name>Artifactory Release Repository</name>-->
-            <!--<url>-->
-                <!--http://mvn2.diligrp.com/artifactory/libs-release-local-->
-            <!--</url>-->
-        <!--</repository>-->
-        <!--<snapshotRepository>-->
-            <!--<id>central</id>-->
-            <!--<name>Artifactory Snapshot Repository</name>-->
-            <!--<url>-->
-                <!--http://mvn2.diligrp.com/artifactory/libs-snapshot-local-->
-            <!--</url>-->
-        <!--</snapshotRepository>-->
-    <!--</distributionManagement>-->
+		<!--<repository>-->
+			<!--<id>maven-releases</id>-->
+			<!--<name>Nexus Release Repository</name>-->
+			<!--<url>-->
+				<!--http://localhost:8081/repository/maven-releases/-->
+			<!--</url>-->
+		<!--</repository>-->
+		<!--<snapshotRepository>-->
+			<!--<id>maven-snapshots</id>-->
+			<!--<name>Nexus Snapshot Repository</name>-->
+			<!--<url>-->
+				<!--http://localhost:8081/repository/maven-snapshots/-->
+			<!--</url>-->
+		<!--</snapshotRepository>-->
+	<!--</distributionManagement>-->
+	<!--地利-->
+	<distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>Artifactory Release Repository</name>
+            <url>
+                http://mvn2.diligrp.com/artifactory/libs-release-local
+            </url>
+        </repository>
+        <snapshotRepository>
+            <id>central</id>
+            <name>Artifactory Snapshot Repository</name>
+            <url>
+                http://mvn2.diligrp.com/artifactory/libs-snapshot-local
+            </url>
+        </snapshotRepository>
+    </distributionManagement>
 
 	<dependencies>
 		<!-- 编译用的包 -->

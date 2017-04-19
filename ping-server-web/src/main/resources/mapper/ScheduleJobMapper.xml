@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dili.ping.server.dao.ScheduleJobMapper">
+<mapper namespace="mapper.ScheduleJobMapper">
   <resultMap id="BaseResultMap" type="com.dili.ping.server.domain.ScheduleJob">
     <!--
       WARNING - @mbg.generated
@@ -16,6 +16,7 @@
     <result column="start_delay" jdbcType="INTEGER" property="startDelay" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="bean_class" jdbcType="VARCHAR" property="beanClass" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="is_concurrent" jdbcType="INTEGER" property="isConcurrent" />
     <result column="spring_id" jdbcType="VARCHAR" property="springId" />
     <result column="method_name" jdbcType="VARCHAR" property="methodName" />
@@ -25,7 +26,7 @@
       WARNING - @mbg.generated
     -->
     id, createTime, updateTime, job_name, job_group, job_status, cron_expression, repeat_interval, 
-    start_delay, description, bean_class, is_concurrent, spring_id, method_name
+    start_delay, description, bean_class, url, is_concurrent, spring_id, method_name
   </sql>
   <select id="selectBy" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--
@@ -71,6 +72,9 @@
       </if>
       <if test="beanClass != null">
         bean_class = #{beanClass,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
       </if>
       <if test="isConcurrent != null">
         is_concurrent = #{isConcurrent,jdbcType=INTEGER},

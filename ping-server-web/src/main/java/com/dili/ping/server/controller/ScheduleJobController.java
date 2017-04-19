@@ -1,8 +1,8 @@
 package com.dili.ping.server.controller;
 
-import com.dili.ping.server.domain.ScheduleJob;
 import com.dili.ping.server.service.ScheduleJobService;
 import com.dili.utils.domain.ResponseMessage;
+import com.dili.utils.quartz.domain.ScheduleJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

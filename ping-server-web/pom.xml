@@ -93,8 +93,8 @@
                         <groupId>com.dili</groupId>
                         <artifactId>springboot-base</artifactId>
                         <version>0.0.1-SNAPSHOT</version>
-                        <scope>system</scope>
-                        <systemPath>${project.basedir}/lib/springboot-base-0.0.1-SNAPSHOT.jar</systemPath>
+                        <!--<scope>system</scope>-->
+                        <!--<systemPath>${project.basedir}/lib/springboot-base-0.0.1-SNAPSHOT.jar</systemPath>-->
                     </dependency>
                     <dependency>
                         <groupId>org.beetl</groupId>
@@ -114,8 +114,8 @@
 			<artifactId>springboot-base</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
             <!--<classifier>pg</classifier>-->
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/springboot-base-0.0.1-SNAPSHOT.jar</systemPath>
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/lib/springboot-base-0.0.1-SNAPSHOT.jar</systemPath>-->
 		</dependency>
         <dependency>
             <groupId>org.mybatis.generator</groupId>

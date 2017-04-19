@@ -2,8 +2,8 @@ package com.dili.ping.server.controller;
 
 import com.dili.ping.server.domain.Device;
 import com.dili.ping.server.service.DeviceService;
-import com.dili.ping.server.utils.bootquartz.domain.ScheduleJob;
-import com.dili.ping.server.utils.bootquartz.service.JobTaskService;
+import com.dili.utils.quartz.domain.ScheduleJob;
+import com.dili.utils.quartz.service.JobTaskService;
 import com.google.common.collect.Lists;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +46,7 @@ public class PingController {
 
         ScheduleJob scheduleJob = getJobByDeviceId(deviceId);
         try {
-            jobTaskService.updateJob(scheduleJob);
+            jobTaskService.addJob(scheduleJob, null, false);
         } catch (SchedulerException e) {
             e.printStackTrace();
         }
@@ -131,7 +131,7 @@ public class PingController {
         device.setId(360l);
         device.setLaunchTime(new Date(System.currentTimeMillis()-3600000l));
         List<Long> ids = Lists.newArrayList(1l);
-        deviceService.del(ids);
+        deviceService.delete(ids);
         model.put("devices", devices);
         model.put("result","刷新完成!");
         return "beetl";
@@ -175,7 +175,7 @@ public class PingController {
         scheduleJob.setStartDelay(0);
         scheduleJob.setRepeatInterval(4);
         try {
-            jobTaskService.addJob(scheduleJob, Lists.newArrayList(3038l));
+            jobTaskService.addJob(scheduleJob, Lists.newArrayList(3038l), true);
         } catch (SchedulerException e) {
             e.printStackTrace();
         }

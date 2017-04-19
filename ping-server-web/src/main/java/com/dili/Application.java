@@ -1,7 +1,7 @@
 package com.dili;
 
-import com.dili.ping.server.utils.bootquartz.SchedulerConfig;
 import com.dili.utils.base.MyMapper;
+import com.dili.utils.quartz.SchedulerConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;

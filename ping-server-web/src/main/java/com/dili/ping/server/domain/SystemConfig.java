@@ -6,7 +6,7 @@ import javax.persistence.*;
 /**
  * 由MyBatis Generator工具自动生成
  * 
- * This file was generated on 2017-04-14 16:26:15.
+ * This file was generated on 2017-04-19 08:57:24.
  */
 @Table(name = "system_config")
 public class SystemConfig {
